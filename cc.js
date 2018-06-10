@@ -13,8 +13,8 @@ function initAutocomplete() {
   {lat: 28.7041, lng: 77.106},
   {lat: 28.7041, lng: 77},
 ]
-	// Create an array of alphabetical characters used to label the markers.
-  function post(path, params, method) {
+
+function post(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
 
     // The rest of this code assumes you are not using a library.
@@ -37,6 +37,8 @@ function initAutocomplete() {
     document.body.appendChild(form);
     form.submit();
 }
+
+	// Create an array of alphabetical characters used to label the markers.
   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var service = locations.map(function(location, i) {
     var mrkr= new google.maps.Marker({
@@ -54,8 +56,16 @@ function initAutocomplete() {
     });
 			mrkr.addListener('click', function() {
                         map.setZoom(9);
-                        post('https://developers.myoperator.co/clickOcall', {token:'7e0b8e28d0885495c2fa3163eec4fdf2',      customer_number:8956317787,customer_cc:91,support_user_id:'mustansir'});
-
+                         var Uresponse=post('https://developers.myoperator.co/clickOcall',{
+                        token:'33cc5148e1fe5bec062f884994258857',
+                        customer_number:8956317787,
+                        customer_cc:91,
+                        support_user_id:'5b1c8b2f03d93672',
+                        }) 
+                   /* var Uresponse= post('https://developers.myoperator.co/user',{tocken:'33cc5148e1fe5bec062f884994258857'}) */
+                  var outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '';
+      outputDiv.innerHTML +=Uresponse.message;
                         
                         });
     return mrkr;    

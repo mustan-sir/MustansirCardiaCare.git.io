@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://fiddle.jshell.net/L5wbz0df/74/show/light/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}
+</style><link type="text/css" rel="stylesheet" href="./css(1)"><style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}
+</style><style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style><style type="text/css">.pac-container{background-color:#fff;position:absolute!important;z-index:1000;border-radius:2px;border-top:1px solid #d9d9d9;font-family:Arial,sans-serif;box-shadow:0 2px 6px rgba(0,0,0,0.3);-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.pac-logo:after{content:"";padding:1px 1px 1px 0;height:16px;text-align:right;display:block;background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);background-position:right;background-repeat:no-repeat;background-size:120px 14px}.hdpi.pac-logo:after{background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png)}.pac-item{cursor:default;padding:0 4px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;line-height:30px;text-align:left;border-top:1px solid #e6e6e6;font-size:11px;color:#999}.pac-item:hover{background-color:#fafafa}.pac-item-selected,.pac-item-selected:hover{background-color:#ebf2fe}.pac-matched{font-weight:700}.pac-item-query{font-size:13px;padding-right:3px;color:#000}.pac-icon{width:15px;height:20px;margin-right:7px;margin-top:6px;display:inline-block;vertical-align:top;background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);background-size:34px}.hdpi .pac-icon{background-image:url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)}.pac-icon-search{background-position:-1px -1px}.pac-item-selected .pac-icon-search{background-position:-18px -1px}.pac-icon-marker{background-position:-1px -161px}.pac-item-selected .pac-icon-marker{background-position:-18px -161px}.pac-placeholder{color:gray}
+</style><style type="text/css">.gm-style-pbc{transition:opacity ease-in-out;background-color:rgba(0,0,0,0.45);text-align:center}.gm-style-pbt{font-size:22px;color:white;font-family:Roboto,Arial,sans-serif;position:relative;margin:0;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
+</style>
+  
+  <title></title>
+  
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="./dummy.js.download"></script>
+
+    <link rel="stylesheet" type="text/css" href="./result-light.css">
+
+  <style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+ #container{
+   width: 100%;
+  height: 100%;
+  position: relative;
+ }
+#map {
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  z-index:1;
+}
+#right-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  
+}
+
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#right-panel {
+  overflow-y:auto;
+  position:absolute;
+  width: 38%;
+  max-height:85%;
+  padding-left: 2%;
+  padding-right:2%;
+  padding-bottom:2%;
+  right:2%;
+  top:10%;
+  
+  background-color:#808080;
+  opacity:0.9;
+  z-index:3;
+  text-align:center;
+}
+#output {
+  font-size: 11px;
+  color:black;
+  background:white;
+  
+}
+#form{
+  opacity:0.85;
+  height:35%;
+  width:50%;
+  position:absolute;
+  z-index:2;
+  bottom:5%;
+  left:2%;
+}
+  </style>
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">
+
+
+    
+function initAutocomplete() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 28.7041, lng: 77.1025},
+    zoom: 10,
+    mapTypeId: 'roadmap'
+  });
+	var locations = [
+  {lat: 28.5306, lng: 77.2808},
+  {lat: 28.874, lng: 77.29},
+  {lat: 28.402, lng: 77.31},
+  {lat: 28.941, lng: 77.85},
+  {lat: 28.34, lng: 77.25},
+  {lat: 28.7041, lng: 77.106},
+  {lat: 28.7041, lng: 77},
+]
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+	// Create an array of alphabetical characters used to label the markers.
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var service = locations.map(function(location, i) {
+    var mrkr= new google.maps.Marker({
+      icon : {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: 'red',
+          fillOpacity: .2,
+          scale: Math.pow(2, 5) / 2,
+          strokeColor: 'white',
+          strokeWeight: .5
+      } ,
+      map:map,
+      position: location,
+      label: labels[i % labels.length]
+    });
+			mrkr.addListener('click', function() {
+                        map.setZoom(9);
+                         var Uresponse=post('https://developers.myoperator.co/clickOcall',{
+                        token:'33cc5148e1fe5bec062f884994258857',
+                        customer_number:8956317787,
+                        customer_cc:91,
+                        support_user_id:'5b1c8b2f03d93672',
+                        }) 
+                   /* var Uresponse= post('https://developers.myoperator.co/user',{tocken:'33cc5148e1fe5bec062f884994258857'}) */
+                  var outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '';
+      outputDiv.innerHTML +=Uresponse.message;
+                        
+                        });
+    return mrkr;    
+  });
+
+ // Add a marker clusterer to manage the markers.
+  var markerCluster = new MarkerClusterer(map, service,
+      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  var destinationA;
+  var destinationIcon = 'https://chart.googleapis.com/chart?' +
+      'chst=d_map_pin_letter&chld=D|FF0000|000000';
+  var originIcon = 'https://chart.googleapis.com/chart?' +
+      'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+       var geocoder = new google.maps.Geocoder;
+  
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+    var markersArray = [];
+
+    places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      var icon = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      markers.push(new google.maps.Marker({
+        map: map,
+        icon: icon,
+        title: place.name,
+        position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+				var latitude = place.geometry.location.lat();
+        var longitude = place.geometry.location.lng();
+        destinationA = {lat:latitude,lng:longitude};
+        bounds.union(place.geometry.viewport);
+        var service = new google.maps.DistanceMatrixService;
+  	service.getDistanceMatrix({
+    origins: locations,
+    destinations: [destinationA],
+    travelMode: 'DRIVING',
+     drivingOptions: {
+    departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
+    trafficModel: 'pessimistic',
+  },
+    unitSystem: google.maps.UnitSystem.METRIC,
+    avoidHighways: false,
+    avoidTolls: false
+  }, function(response, status) {
+    if (status !== 'OK') {
+      alert('Error was: ' + status);
+    } else {
+      var originList = response.originAddresses;
+      var destinationList = response.destinationAddresses;
+      var outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '';
+
+      var showGeocodedAddressOnMap = function(asDestination) {
+        var icon = asDestination ? destinationIcon : originIcon;
+        return function(results, status) {
+          if (status === 'OK') {
+            map.fitBounds(bounds.extend(results[0].geometry.location));
+            markersArray.push(new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location,
+              icon: icon
+            }));
+          } else {
+            alert('Geocode was not successful due to: ' + status);
+          }
+        };
+      };
+
+      for (var i = 0; i < originList.length; i++) {
+        var results = response.rows[i].elements;
+        geocoder.geocode({'address': originList[i]},
+            showGeocodedAddressOnMap(false));
+        for (var j = 0; j < results.length; j++) {
+          geocoder.geocode({'address': destinationList[j]},
+              showGeocodedAddressOnMap(true));
+          outputDiv.innerHTML += 'supplier no.'+(i+1)+' : <br>'+ originList[i] + '<br> to <br> ' + destinationList[j] +
+              ': <br> ' + results[j].distance.text + '<br> in ' +
+              results[j].duration.text + '<br>'+'************** <br>';
+        }
+      }
+    }
+  });
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+  map.fitBounds(bounds);
+  });
+  }
+  
+  
+
+
+</script>
+
+<script type="text/javascript" charset="UTF-8" src="./common.js.download"></script><script type="text/javascript" charset="UTF-8" src="./util.js.download"></script><script type="text/javascript" charset="UTF-8" src="./map.js.download"></script><script type="text/javascript" charset="UTF-8" src="./marker.js.download"></script><script type="text/javascript" charset="UTF-8" src="./overlay.js.download"></script><script type="text/javascript" charset="UTF-8" src="./controls.js.download"></script><script type="text/javascript" charset="UTF-8" src="./places_impl.js.download"></script><script type="text/javascript" charset="UTF-8" src="./geocoder.js.download"></script><style type="text/css">.gm-style {
+        font: 400 11px Roboto, Arial, sans-serif;
+        text-decoration: none;
+      }
+      .gm-style img { max-width: none; }</style><script type="text/javascript" charset="UTF-8" src="./onion.js.download"></script><script type="text/javascript" charset="UTF-8" src="./stats.js.download"></script><script type="text/javascript" charset="UTF-8" src="./distance_matrix.js.download"></script></head>
+<body>
+  
+<div id="container">
+
+  <div id="map" style="overflow: hidden;"><div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;"><div tabindex="0" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: pan-x pan-y;"><div style="z-index: 1; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -109, -25);"><div style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -256px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 0px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 256px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 256px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 0px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -256px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -512px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -512px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -512px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -512px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -256px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 0px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 256px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 512px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 512px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 512px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -768px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -768px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -768px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -768px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 768px; top: -512px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 768px; top: -256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 768px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 768px; top: 256px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -109, -25);"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -256px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -256px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 256px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 256px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 256px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -256px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -512px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -512px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -512px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -512px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -256px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 256px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 512px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 512px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 512px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 512px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -768px; top: 256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -768px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -768px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -768px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 768px; top: -512px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 768px; top: -256px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 768px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 768px; top: 256px;"></div></div></div><div style="width: 34px; height: 34px; position: absolute; left: -136px; top: -160px; z-index: -143;"><canvas width="34" height="34" draggable="false" style="width: 34px; height: 34px; position: absolute; left: 0px; top: 0px; user-select: none;"></canvas></div><div style="width: 34px; height: 34px; position: absolute; left: -34px; top: -174px; z-index: -157;"><canvas width="34" height="34" draggable="false" style="width: 34px; height: 34px; position: absolute; left: 0px; top: 0px; user-select: none;"></canvas></div><div style="width: 71px; height: 71px; overflow: hidden; position: absolute; left: -138px; top: -106px; z-index: -72;"><img alt="" src="./geocode-71.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 25px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -131px; top: -106px; z-index: -72;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -131px; top: -175px; z-index: -141;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -126px; top: -79px; z-index: -45;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -28px; top: -191px; z-index: -157;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -137px; top: -67px; z-index: -33;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="width: 21px; height: 34px; overflow: hidden; position: absolute; left: -163px; top: -142px; z-index: -108;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="position: absolute; left: -119px; top: -143px; z-index: -143;"><div style="height: 100px; margin-top: -50px; margin-left: -50%; display: table; border-spacing: 0px;"><div style="display: table-cell; vertical-align: middle; white-space: nowrap; text-align: center;"><div style="color: rgb(0, 0, 0); font-size: 14px; font-family: Roboto, Arial, sans-serif;">B</div></div></div></div><div style="position: absolute; left: -17px; top: -157px; z-index: -157;"><div style="height: 100px; margin-top: -50px; margin-left: -50%; display: table; border-spacing: 0px;"><div style="display: table-cell; vertical-align: middle; white-space: nowrap; text-align: center;"><div style="color: rgb(0, 0, 0); font-size: 14px; font-family: Roboto, Arial, sans-serif;">D</div></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -109, -25);"><div style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -256px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(1)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 256px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(2)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(3)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 256px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(4)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 0px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(5)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -256px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(6)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -512px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(7)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -512px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(8)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -512px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(9)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -512px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(10)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -256px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(11)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(12)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 0px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(13)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 0px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(14)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 256px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(15)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 512px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(16)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 768px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(17)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 768px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(18)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -768px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(19)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -768px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(20)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -768px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(21)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 768px; top: -512px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(22)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 768px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(23)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 512px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(24)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -768px; top: 256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(25)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 512px; top: -256px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(26)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px;"><img draggable="false" alt="" src="./vt(27)" style="width: 256px; height: 256px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div class="gm-style-pbc" style="z-index: 2; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0; transition-duration: 0.2s;"><p class="gm-style-pbt">Use ctrl + scroll to zoom the map</p></div><div style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;"><div style="z-index: 1; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px;"></div><div style="z-index: 4; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"><div class="gmnoprint" title="" style="width: 34px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -136px; top: -160px; z-index: -143;"><img alt="" src="./transparent.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 34px; height: 34px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 34px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -34px; top: -174px; z-index: -157;"><img alt="" src="./transparent.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 34px; height: 34px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="Okhla Industrial Area" style="width: 71px; height: 71px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -138px; top: -106px; z-index: -72;"><img alt="" src="./geocode-71.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 25px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -131px; top: -106px; z-index: -72;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -132px; top: -107px; z-index: -73;"><img alt="" src="./chart(1)" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -131px; top: -175px; z-index: -141;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -126px; top: -79px; z-index: -45;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -28px; top: -191px; z-index: -157;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -137px; top: -67px; z-index: -33;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div class="gmnoprint" title="" style="width: 21px; height: 34px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -163px; top: -142px; z-index: -108;"><img alt="" src="./chart" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; width: 21px; height: 34px; border: 0px; padding: 0px; margin: 0px; max-width: none; opacity: 1;"></div><div style="background-image: url(&quot;https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png&quot;); background-position: 0px 0px; height: 53px; line-height: 53px; width: 53px; text-align: center; cursor: pointer; top: -98px; left: -146px; color: black; position: absolute; font-size: 11px; font-family: Arial, sans-serif; font-weight: bold;">5</div><div></div><div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div></div><iframe frameborder="0" src="./saved_resource(1).html" style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=28.181739,77.94247&amp;z=8&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img alt="" src="./google4.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 533px; top: 192px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">Map data ©2018 Google</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img alt="" src="./mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 166px; bottom: 0px; width: 121px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>Map data ©2018 Google</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">Map data ©2018 Google</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; user-select: none; height: 14px; line-height: 14px; position: absolute; right: 95px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><button draggable="false" title="Toggle fullscreen view" aria-label="Toggle fullscreen view" type="button" style="background: none rgb(255, 255, 255); border: 0px; margin: 10px 14px; padding: 0px; position: absolute; cursor: pointer; user-select: none; top: 0px; right: 0px;"></button><input id="pac-input" class="controls" type="text" placeholder="Search Box" autocomplete="off" style="z-index: 0; position: absolute; left: 114px; top: 0px;"><div draggable="false" class="gm-style-cc" style="user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_blank" rel="noopener" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@28.1817386,77.9424699,8z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="28" controlheight="93" style="margin: 10px; user-select: none; position: absolute; bottom: 107px; right: 28px;"><div class="gmnoprint" controlwidth="28" controlheight="55" style="position: absolute; left: 0px; top: 38px;"><div draggable="false" style="user-select: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; background-color: rgb(255, 255, 255); width: 28px; height: 55px;"><button draggable="false" title="Zoom in" aria-label="Zoom in" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; background-color: rgb(230, 230, 230); top: 0px;"></div><button draggable="false" title="Zoom out" aria-label="Zoom out" type="button" style="background: none; display: block; border: 0px; margin: 0px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 28px; height: 27px; top: 0px; left: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img alt="" src="./tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: -15px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></button></div></div><div class="gm-svpc" controlwidth="28" controlheight="28" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; width: 28px; height: 28px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: none; position: absolute; left: 0px; top: 0px;"><div style="position: absolute; left: 1px; top: 1px;"></div><div style="position: absolute; left: 1px; top: 1px;"><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px;"><img alt="" src="./cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -26px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Pegman is on top of the Map" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img alt="" src="./cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -52px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div aria-label="Street View Pegman Control" style="width: 26px; height: 26px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img alt="" src="./cb_scout5.png" draggable="false" style="position: absolute; left: -147px; top: -78px; width: 215px; height: 835px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; display: none;"><img alt="" src="./tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 28px; height: 28px; overflow: hidden; position: absolute; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px; top: 0px; cursor: pointer;"><img alt="" src="./tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div><div class="gmnoprint" style="margin: 10px; z-index: 0; position: absolute; cursor: pointer; left: 0px; top: 0px;"><div class="gm-style-mtc" style="float: left; position: relative;"><div role="button" tabindex="0" title="Show street map" aria-label="Show street map" aria-pressed="true" draggable="false" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 22px; font-weight: 500;">Map</div><div style="background-color: white; z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; position: absolute; left: 0px; top: 29px; text-align: left; display: none;"><div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap;"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img alt="" src="./imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Terrain</label></div></div></div><div class="gm-style-mtc" style="float: left; position: relative;"><div role="button" tabindex="0" title="Show satellite imagery" aria-label="Show satellite imagery" aria-pressed="false" draggable="false" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 8px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; background-clip: padding-box; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; min-width: 40px; border-left: 0px;">Satellite</div><div style="background-color: white; z-index: -1; padding: 2px; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; position: absolute; right: 0px; top: 29px; text-align: left; display: none;"><div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 6px 8px 6px 6px; direction: ltr; text-align: left; white-space: nowrap;"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img alt="" src="./imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 68px; height: 67px;"></div></span><label style="vertical-align: middle; cursor: pointer;">Labels</label></div></div></div></div></div></div></div>
+  
+  <div id="right-panel">
+      <div id="inputs">
+      </div>
+      <div>
+        <strong>Results</strong>
+      </div>
+      <div id="output">supplier no.1 : <br>B-70, Pocket B, Okhla Phase I, Okhla Industrial Area, New Delhi, Delhi 110020, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 0.6 km<br> in 3 mins<br>************** <br>supplier no.2 : <br>Khekra, Uttar Pradesh 250101, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 51.1 km<br> in 1 hour 35 mins<br>************** <br>supplier no.3 : <br>17/6, Mathura Rd, Sarpanch Colony, Sector 20A, Faridabad, Haryana 121002, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 16.6 km<br> in 26 mins<br>************** <br>supplier no.4 : <br>Unnamed Road, Kayastha Badha, Uttar Pradesh 250001, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 95.6 km<br> in 2 hours 43 mins<br>************** <br>supplier no.5 : <br>Kureshipur, Haryana 121004, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 28.5 km<br> in 53 mins<br>************** <br>supplier no.6 : <br>G-30/94, Maharaja Agrasen Marg, Sector 3, Pocket 30, Sector 3G, Rohini, Delhi, 110085, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 41.9 km<br> in 1 hour 7 mins<br>************** <br>supplier no.7 : <br>Dr Sahib Singh Verma Marg, Upkar Vihar Colony, Sawda, Delhi, 110081, India<br> to <br> W-9, Tum Rd, Pocket W, Okhla Phase II, Okhla Industrial Area, New Delhi, Delhi 110020, India: <br> 44.1 km<br> in 1 hour 28 mins<br>************** <br></div>
+    </div>
+  <div id="form">  
+    <iframe src="./viewform.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
+  
+
+</div>
+
+   
+<!-- Replace the value of the key parameter with your own API key. -->
+<script src="./js" async="" defer=""></script>
+         <script src="./markerclusterer.js.download"></script>
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "L5wbz0df"
+      }], "*")
+    }
+  </script>
+
+
+<div class="pac-container pac-logo" style="width: 424px; position: absolute; left: 125px; top: 22px; display: none;"></div></body></html>
